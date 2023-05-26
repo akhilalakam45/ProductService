@@ -21,7 +21,7 @@ public class ImageService {
 		image.setDescription(description);
 		image.setImage(multipartFile.getBytes());
 		imageRepository.save(image);
-		return "saved image successfully";
+		return "Image saved successfully";
 	}
 
 }
