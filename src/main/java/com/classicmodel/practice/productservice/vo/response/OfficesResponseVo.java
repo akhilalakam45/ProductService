@@ -1,10 +1,9 @@
-package com.classicmodel.practice.productservice.response;
+package com.classicmodel.practice.productservice.vo.response;
 
 import java.util.List;
 
-import com.classicmodel.practice.productservice.entity.Employees;
 
-public class OfficesWithEmployees {
+public class OfficesResponseVo {
 
 	private String officeCode;
 	private String city;
@@ -19,7 +18,7 @@ public class OfficesWithEmployees {
 	private String postalCode;
 	private String territory;
 	
-	private List<EmployeesOfOffice> employees;
+	private List<EmployeesResponseVo> employees;
 
 	public String getOfficeCode() {
 		return officeCode;
@@ -93,11 +92,11 @@ public class OfficesWithEmployees {
 		this.territory = territory;
 	}
 
-	public List<EmployeesOfOffice> getEmployees() {
+	public List<EmployeesResponseVo> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(List<EmployeesOfOffice> employees) {
+	public void setEmployees(List<EmployeesResponseVo> employees) {
 		this.employees = employees;
 	}
 	

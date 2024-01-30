@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.classicmodel.practice.productservice.entity.Employees;
 import com.classicmodel.practice.productservice.entity.Offices;
 import com.classicmodel.practice.productservice.repository.OfficesRepository;
-import com.classicmodel.practice.productservice.response.EmployeesOfOffice;
-import com.classicmodel.practice.productservice.response.OfficesWithEmployees;
+import com.classicmodel.practice.productservice.vo.response.EmployeesResponseVo;
+import com.classicmodel.practice.productservice.vo.response.OfficesResponseVo;
 
 @Service
 public class OfficesService {
@@ -18,33 +18,42 @@ public class OfficesService {
 	@Autowired
 	private OfficesRepository officesRepository;
 
-	public List<OfficesWithEmployees> getOffices() {
+	public List<OfficesResponseVo> getOffices() {
 		
 		List<Offices> offices = officesRepository.findAll();
+		List<OfficesResponseVo> officesResponseVos = new ArrayList<OfficesResponseVo>();
 		
-		List<OfficesWithEmployees> officesWithEmployees = new ArrayList<OfficesWithEmployees>();
-		
-		for (Offices offices2  : offices) {
+		for (Offices office  : offices) {
 			
-			OfficesWithEmployees withEmployees = new OfficesWithEmployees();
+			OfficesResponseVo officesResponseVo = new OfficesResponseVo();
+			officesResponseVo.setOfficeCode(office.getOfficeCode());
+			officesResponseVo.setAddressLine1(office.getAddressLine1());
+			officesResponseVo.setAddressLine2(office.getAddressLine2());
+			officesResponseVo.setCity(office.getCity());
+			officesResponseVo.setCountry(office.getCountry());
+			officesResponseVo.setPhone(office.getPhone());
+			officesResponseVo.setPostalCode(office.getPostalCode());
+			officesResponseVo.setState(office.getState());
+			officesResponseVo.setTerritory(office.getTerritory());
 			
-			withEmployees.setOfficeCode(offices2.getOfficeCode());
+			List<EmployeesResponseVo> employeesResponseVos = new ArrayList<EmployeesResponseVo>();
 			
-			List<EmployeesOfOffice> employeesOfOffices = new ArrayList<EmployeesOfOffice>();
-			
-			for (Employees employees : offices2.getEmployees()) {
-				
-				EmployeesOfOffice employeesOfOffice = new EmployeesOfOffice();
-				employeesOfOffice.setEmployeeNumber(employees.getEmployeeNumber());
-				employeesOfOffices.add(employeesOfOffice);
+			for (Employees employee : office.getEmployees()) {
+				EmployeesResponseVo employeesResponseVo = new EmployeesResponseVo();
+				employeesResponseVo.setEmployeeNumber(employee.getEmployeeNumber());
+				employeesResponseVo.setEmail(employee.getEmail());
+				employeesResponseVo.setExtension(employee.getExtension());
+				employeesResponseVo.setFirstName(employee.getFirstName());
+				employeesResponseVo.setLastName(employee.getLastName());
+				employeesResponseVo.setJobTitle(employee.getJobTitle());
+				employeesResponseVo.setReportsTo(employee.getReportsTo());
+				employeesResponseVos.add(employeesResponseVo);
 			}
 			
-			withEmployees.setEmployees(employeesOfOffices);
-			officesWithEmployees.add(withEmployees);
+			officesResponseVo.setEmployees(employeesResponseVos);
+			officesResponseVos.add(officesResponseVo);
 		}
-		
-		
-		return officesWithEmployees;
+		return officesResponseVos;
 	}
 
 }

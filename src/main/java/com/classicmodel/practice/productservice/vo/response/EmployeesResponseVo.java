@@ -1,57 +1,14 @@
-package com.classicmodel.practice.productservice.entity;
+package com.classicmodel.practice.productservice.vo.response;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.Columns;
-import org.springframework.lang.Nullable;
-
-@Entity
-public class Employees implements Serializable {
+public class EmployeesResponseVo {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="employeenumber")
 	private int employeeNumber;
-	
-	@Column(name="lastname")
 	private String lastName;
-	
-	@Column(name="firstname")
 	private String firstName;
-	
-	@Column(name="extension")
 	private String extension;
-	
-	@Column(name="email")
 	private String email; 
-	
-	@Column(name="reportsto")
 	private Integer reportsTo;
-	
-	@Column(name="jobtitle")
 	private String jobTitle;
-	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "officecode")
-	private Offices office;
-	
-	
-	public Offices getOffice() {
-		return office;
-	}
-	public void setOffice(Offices office) {
-		this.office = office;
-	}
 	public int getEmployeeNumber() {
 		return employeeNumber;
 	}
