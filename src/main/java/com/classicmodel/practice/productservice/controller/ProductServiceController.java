@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.classicmodel.practice.productservice.entity.Employees;
-import com.classicmodel.practice.productservice.entity.Offices;
+import com.classicmodel.practice.productservice.entity.Payments;
 import com.classicmodel.practice.productservice.entity.ProductLines;
 import com.classicmodel.practice.productservice.entity.Products;
-import com.classicmodel.practice.productservice.response.OfficesWithEmployees;
 import com.classicmodel.practice.productservice.service.EmployeeService;
 import com.classicmodel.practice.productservice.service.OfficesService;
+import com.classicmodel.practice.productservice.service.PaymentsService;
 import com.classicmodel.practice.productservice.service.ProductLinesService;
 import com.classicmodel.practice.productservice.service.ProductsService;
+import com.classicmodel.practice.productservice.vo.response.EmployeesResponseVo;
+import com.classicmodel.practice.productservice.vo.response.OfficesResponseVo;
 
 @RestController
 @RequestMapping("/productService")
@@ -33,14 +34,17 @@ public class ProductServiceController {
 	@Autowired
 	private ProductsService productsService;
 	
+	@Autowired
+	private PaymentsService paymentsService;
+	
 	@GetMapping("getEmployees")
-	public List<Employees> getEmployees() {
+	public List<EmployeesResponseVo> getEmployees() {
 		return employeeService.getEmployees();
 	}
 	
 	
 	@GetMapping("getOffices")
-	public List<OfficesWithEmployees> getOffices() {
+	public List<OfficesResponseVo> getOffices() {
 		return officesService.getOffices();
 	}
 	
@@ -52,6 +56,11 @@ public class ProductServiceController {
 	@GetMapping("getProducts")
 	public List<Products> getProducts() {
 		return productsService.getProducts();
+	}
+	
+	@GetMapping("getPayments")
+	public List<Payments> getPayments() {
+		return paymentsService.getPayments();
 	}
 	
 

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -14,6 +15,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Offices implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "officecode", nullable = false)
@@ -33,7 +39,7 @@ public class Offices implements Serializable {
 	private String postalCode;
 	private String territory;
 	
-	@OneToMany(mappedBy ="office", cascade={CascadeType.ALL})
+	@OneToMany(mappedBy ="office", cascade={CascadeType.ALL}, fetch = FetchType.LAZY)
 	private List<Employees> employees;
 	
 	public String getOfficeCode() {
